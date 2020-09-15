@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sovellus</string>
+    <string name="text_name">Hei</string>
+    <string name="button_name">Nappi</string>
+    <string name="image_name">Taivas</string>
+</resources>
