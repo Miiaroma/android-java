@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button;
     TextView textView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +23,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.i(TAG, "activating play view");
 
-        // Get a string resource from your app's Resources
-        String hello = getResources().getString(R.string.text_name);
+        textView = findViewById(R.id.textView);
+        textView.getVisibility();
+    }
 
-        // Or supply a string resource to a method that requires a string
-        TextView textView = new TextView(this);
-        textView.setText(R.string.text_name);
-        //greetingsText.getVisibility();
-        //greetingsText.setVisibility(View.INVISIBLE);
-
+    public void setTextVisibility(){
+       if(textView.getVisibility() == View.VISIBLE) {
+           textView.setVisibility(View.INVISIBLE);
+       } else {
+           textView.setVisibility(View.VISIBLE);
+       }
     }
 
     @Override
@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.button:
                 Log.e("test", "Button has been clicked");
+                setTextVisibility();
                 break;
         }
     }
-    } 
+}
