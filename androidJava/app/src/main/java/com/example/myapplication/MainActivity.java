@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG ="MyAppMessage";
     Button button;
     TextView textView;
+    Button buttonGame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +23,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
         button.setOnClickListener(this);
+        buttonGame = findViewById(R.id.buttonGame);
+        buttonGame.setOnClickListener(this);
 
         Log.i(TAG, "activating play view");
 
         textView = findViewById(R.id.textView);
         textView.getVisibility();
+
     }
 
     public void setTextVisibility(){
@@ -35,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        }
     }
 
+    public void OpenActivityGuess(){
+        Intent i = new Intent(this,Guess.class);
+        startActivity(i);
+    }
+
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -42,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("test", "Button has been clicked");
                 setTextVisibility();
                 break;
+
+            case R.id.buttonGame:
+                OpenActivityGuess();
+                break;
+
         }
     }
 }

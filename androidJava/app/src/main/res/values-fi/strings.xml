@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sovellus</string>
-    <string name="text_name">Hei</string>
-    <string name="button_name">Nappi</string>
     <string name="image_name">Taivas</string>
+    <string name="button_game">Peli</string>
+    <string name="button_name">Vaihda</string>
+    <string name="text_name">Moikka!</string>
+    <string name="title">Arvauspeli</string>
+    <string name="star">Painike</string>
+    <string name="star1">Painike1</string>
+    <string name="star2">Painike2</string>
+    <string name="star3">Painike3</string>
 </resources>

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="text_name">Hello</string>
-    <string name="button_name">Button</string>
+    <string name="text_name">Hello World!</string>
+    <string name="button_name">Change</string>
     <string name="image_name">Sky</string>
+    <string name="button_game">Guess</string>
+    <string name="title">Guess Game</string>
+    <string name="star">ImgBtn</string>
+    <string name="star1">ImgBtn1</string>
+    <string name="star2">ImgBtn2</string>
+    <string name="star3">ImgBtn3</string>
 </resources>
