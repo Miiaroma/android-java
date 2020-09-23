@@ -9,9 +9,8 @@
     <string name="star1">ImgBtn1</string>
     <string name="star2">ImgBtn2</string>
     <string name="star3">ImgBtn3</string>
-    <string name="viewScore">Best score:</string>
-    <string name="win"> </string>
-    <string name="title_activity_main3">MainActivity</string>
+    <string name="bestScore"> </string>
+    <string name="title_activity_main3">My Application</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>

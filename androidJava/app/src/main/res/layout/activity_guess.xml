@@ -7,19 +7,6 @@
     tools:context=".Guess">
 
     <TextView
-        android:id="@+id/win"
-        android:layout_width="103dp"
-        android:layout_height="28dp"
-        android:text="@string/win"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-        app:layout_constraintVertical_bias="0.529" />
-
-    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,17 +93,16 @@
         android:focusable="true" />
 
     <TextView
-        android:id="@+id/viewScore"
-        android:layout_width="103dp"
-        android:layout_height="28dp"
-        android:text="@string/viewScore"
+        android:id="@+id/bestScore"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/bestScore"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintVertical_bias="0.512" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
