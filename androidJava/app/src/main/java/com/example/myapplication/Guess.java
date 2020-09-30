@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,9 +29,11 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
     TextView bestScore;
     int MAX_COUNT = 4;
     int guess;
+    int score;
     Intent intent;
     //File fos;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
         intent = new Intent(this, Guess.class);
         File internalStorageDir = getFilesDir();
         File score = new File(internalStorageDir, "score.csv");
+
     }
 
     public int getRandom() {
@@ -60,8 +64,11 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
 
     public void setScore()
     {
+        if(guess > score) {
+            score =guess;
+            bestScore.setText("Best score:"+guess+"/" +MAX_COUNT);
+        }
 
-        bestScore.setText("Best score:"+guess+"/" +MAX_COUNT);
     }
 
     /*public void write(
@@ -86,8 +93,6 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                     star.startAnimation(animation);
                     guess++;
                     setScore();
-
-
                 }
                 star.setVisibility(View.VISIBLE);
 
@@ -97,11 +102,10 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                 if(rnd == 1) {
                     star1.setVisibility(View.GONE);
                     star1.setImageResource(R.mipmap.ic_apple);
-                    star1.setBackgroundColor(Color.WHITE);
+                    star1.setBackgroundColor(Color.TRANSPARENT);
                     star1.startAnimation(animation);
                     guess++;
                     setScore();
-
                 }
                 star1.setVisibility(View.VISIBLE);
 
@@ -111,7 +115,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                 if(rnd == 2) {
                     star2.setVisibility(View.GONE);
                     star2.setImageResource(R.mipmap.ic_apple);
-                    star2.setBackgroundColor(Color.WHITE);
+                    star2.setBackgroundColor(Color.TRANSPARENT);
                     star2.startAnimation(animation);
                     guess++;
                     setScore();
@@ -124,7 +128,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                 if(rnd == 3) {
                     star3.setVisibility(View.GONE);
                     star3.setImageResource(R.mipmap.ic_apple);
-                    star3.setBackgroundColor(Color.WHITE);
+                    star3.setBackgroundColor(Color.TRANSPARENT);
                     star3.startAnimation(animation);
                     guess++;
                     setScore();
@@ -132,6 +136,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                 star3.setVisibility(View.VISIBLE);
 
                 break;
+
             default:
                 break;
         }

@@ -23,8 +23,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
     Button button;
     TextView textV;
     Button buttonGame;
-    Intent intent;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,7 +47,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
             }
         });*/
         return root;
-
     }
 
     public void setTextVisibility(){
@@ -77,4 +74,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                 OpenActivityGuess();
                 break;
         }
-}}
+    }
+}
