@@ -7,14 +7,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,7 +30,7 @@ public class DashboardFragment extends Fragment implements LocationListener {
     LocationManager locationManager;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION =111;
     private static final String TAG = "DashboardFragment";
-
+    Location location;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class DashboardFragment extends Fragment implements LocationListener {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
+           @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
@@ -68,49 +71,48 @@ public class DashboardFragment extends Fragment implements LocationListener {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        location.getLatitude();
+        location.getLongitude();
 
     }
 
-    /*@Override
+    @Override
     public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int [] grantResults) {
         Log.e(TAG, "permsRequestCode = " +permsRequestCode);
         switch (permsRequestCode){
             case MY_PERMISSIONS_REQUEST_FINE_LOCATION:
-                if(grantResults.length == 1
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showExplanation("Permission granted","Location", Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                if(grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //showExplanation("Permission granted","Location", Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
                 }
                 else {
-                    showExplanation("Permission needed", "Location", Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                    //showExplanation("Permission needed", "Location", Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
                 }
                 break;
         }
     }
 
     // Function to check and request permission
-    /*@Override
-    public void onRequestPermissionResult(String permission, int requestCode)
+    public void checkPermission(String permission, int requestCode)
     {
 
         // Checking if permission is not granted
         if (ContextCompat.checkSelfPermission(
-                MainActivity.this,
+                getContext(),
                 permission)
                 == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat
-                    .requestPermissions(
-                            MainActivity.this,
-                            new String[] { permission },
-                            requestCode);
+            requestPermissions(
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_FINE_LOCATION);
         }
         else {
             Toast
-                    .makeText(MainActivity.this,
+                    .makeText(getContext(),
                             "Permission already granted",
                             Toast.LENGTH_SHORT)
                     .show();
         }
-    }*/
+    }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {

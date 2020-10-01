@@ -10,11 +10,14 @@
     <string name="star1">Painike1</string>
     <string name="star2">Painike2</string>
     <string name="star3">Painike3</string>
-    <string name="win">Paras tulos</string>
-    <string name="viewScore">Paras tulos</string>
     <string name="bestScore">Paras tulos</string>
     <string name="title_activity_main3">Sovellus</string>
     <string name="title_home">Koti</string>
     <string name="title_notifications">Ilmoitukset</string>
     <string name="title_dashboard">Työpöytä</string>
+    <string name="text_dashboard">Sijaintisi</string>
+    <string name="label_latitude">Leveysaste (pohjois-etelä sijainti)</string>
+    <string name="label_longitude">Pituusaste (itä-länsi sijainti)</string>
+    <string name="label_address">Osoite</string>
+    <string name="button_toMap">Näytä kartalla</string>
 </resources>
