@@ -1,8 +1,11 @@
 package com.example.myapplication.ui.dashboard;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +28,24 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
 
-public class DashboardFragment extends Fragment implements LocationListener {
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+public class DashboardFragment extends Fragment implements LocationListener, View.OnClickListener {
 
     private DashboardViewModel dashboardViewModel;
     LocationManager locationManager;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION =111;
     private static final String TAG = "DashboardFragment";
     Location location;
+    private TextView locationLatitude;
+    private TextView locationLongitude;
+    private TextView locationAddress;
+    private Button buttonMap;
+    String currentLocation = "";
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,13 +60,22 @@ public class DashboardFragment extends Fragment implements LocationListener {
             }
         });
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationLatitude = root.findViewById(R.id.text_input_latitude);
+        locationLongitude = root.findViewById(R.id.text_input_longitude);
+        locationAddress = root.findViewById(R.id.text_input_address);
+        buttonMap = root.findViewById(R.id.button_toMap);
         startLocationUpdates();
-
         return root;
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void startLocationUpdates() {
+
+        if (locationManager == null){
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        }
+
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -72,10 +96,14 @@ public class DashboardFragment extends Fragment implements LocationListener {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        location.getLatitude();
-        location.getLongitude();
 
+        if(location != null){
+            locationLatitude.setText(Double.toString(location.getLatitude()));
+            locationLongitude.setText(Double.toString(location.getLongitude()));
+            locationAddress.setText(getAddress(location));
+        }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int [] grantResults) {
@@ -95,7 +123,6 @@ public class DashboardFragment extends Fragment implements LocationListener {
     // Function to check and request permission
     public void checkPermission(String permission, int requestCode)
     {
-
         // Checking if permission is not granted
         if (ContextCompat.checkSelfPermission(
                 getContext(),
@@ -116,6 +143,59 @@ public class DashboardFragment extends Fragment implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+            getAddress(location);
+        }
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
 
     }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+    private String getAddress(Location location) {
+        try {
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(
+                    location.getLatitude(),
+                    location.getLongitude(),
+                    1); // Here 1 represent maxResults
+
+            Address address = addresses.get(0);
+            currentLocation = address.getAddressLine(0); // getAddressLine returns a line of the address
+            // numbered by the given index
+
+        } catch (IOException e) {
+            Log.e(TAG, "Error" + e);
+        }
+        Log.i(TAG, currentLocation);
+        return currentLocation;
+    }
+
+    /*public void startActivityMap(){
+            Intent i = new Intent(getActivity(), Geocoder.class);
+            startActivity(i);
+    }*/
+
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.button_toMap:
+                Log.e("test", "Button has been clicked");
+                //startActivityMap();
+                break;
+        }
+    }
+
+
 }
+
+
+
+
+
