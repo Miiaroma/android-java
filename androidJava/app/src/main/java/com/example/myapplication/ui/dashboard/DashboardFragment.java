@@ -177,9 +177,13 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         return currentLocation;
     }
 
-    /*public void startActivityMap(){
-            Intent i = new Intent(getActivity(), Geocoder.class);
-            startActivity(i);
+    /*public void startActivateMap(){
+        Uri webPage = Uri.parse("geo:61.0663,28.0921");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, webPage);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }*/
 
     @Override
@@ -187,11 +191,10 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         switch (v.getId()){
             case R.id.button_toMap:
                 Log.e("test", "Button has been clicked");
-                //startActivityMap();
+                //startActivateMap();
                 break;
         }
     }
-
 
 }
 

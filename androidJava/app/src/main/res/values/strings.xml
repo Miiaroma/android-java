@@ -15,7 +15,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="text_dashboard">Your Location</string>
+    <string name="text_title">Your Location</string>
+    <string name="text_dashboard">Dasboard fragment</string>
     <string name="label_latitude">Latitude (North-South Location)</string>
     <string name="label_longitude">Longitude (East-West Location)</string>
     <string name="label_address">Address</string>

@@ -15,9 +15,10 @@
     <string name="title_home">Koti</string>
     <string name="title_notifications">Ilmoitukset</string>
     <string name="title_dashboard">Työpöytä</string>
-    <string name="text_dashboard">Sijaintisi</string>
+    <string name="text_dashboard">Työpöytäfragmentti</string>
     <string name="label_latitude">Leveysaste (pohjois-etelä sijainti)</string>
     <string name="label_longitude">Pituusaste (itä-länsi sijainti)</string>
     <string name="label_address">Osoite</string>
     <string name="button_toMap">Näytä kartalla</string>
+    <string name="text_title">Sijaintisi</string>
 </resources>
