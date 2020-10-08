@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +15,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
+
+    BroadcastReceiver br;
+    IntentFilter filter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +34,25 @@ public class Home extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(br, filter);
+    }
+
+    public void registerReceiver (){
+        br = new ApmReceiver();
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        this.registerReceiver(br, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+
 
 }

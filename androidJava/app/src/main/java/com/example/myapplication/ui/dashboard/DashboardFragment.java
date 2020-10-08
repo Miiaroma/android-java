@@ -3,12 +3,14 @@ package com.example.myapplication.ui.dashboard;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +49,7 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
 
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
@@ -64,6 +67,7 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         locationLongitude = root.findViewById(R.id.text_input_longitude);
         locationAddress = root.findViewById(R.id.text_input_address);
         buttonMap = root.findViewById(R.id.button_toMap);
+        buttonMap.setOnClickListener(this);
         startLocationUpdates();
         return root;
 
@@ -143,7 +147,9 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-            getAddress(location);
+            locationLatitude.setText(Double.toString(location.getLatitude()));
+            locationLongitude.setText(Double.toString(location.getLongitude()));
+            locationAddress.setText(getAddress(location));
         }
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
@@ -177,21 +183,19 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         return currentLocation;
     }
 
-    /*public void startActivateMap(){
-        Uri webPage = Uri.parse("geo:61.0663,28.0921");
+    public void startActivateMap(){
+        Uri webPage = Uri.parse("geo:"+locationLatitude+","+locationLongitude);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, webPage);
         mapIntent.setPackage("com.google.android.apps.maps");
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
-    }*/
+        startActivity(mapIntent);
+    }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
             case R.id.button_toMap:
                 Log.e("test", "Button has been clicked");
-                //startActivateMap();
+                startActivateMap();
                 break;
         }
     }
