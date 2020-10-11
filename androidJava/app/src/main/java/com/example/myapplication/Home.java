@@ -15,10 +15,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
-
-    BroadcastReceiver br;
+    BroadcastReceiver receiver;
     IntentFilter filter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +36,19 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(br, filter);
+        registerReceiver();
     }
 
     public void registerReceiver (){
-        br = new ApmReceiver();
+        receiver = new ApmReceiver();
         filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver(br, filter);
+        this.registerReceiver(receiver, filter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        unregisterReceiver(receiver);
     }
-
-
-
 }
