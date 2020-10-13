@@ -18,6 +18,7 @@ public class Home extends AppCompatActivity {
     BroadcastReceiver receiver;
     IntentFilter filter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +34,25 @@ public class Home extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver();
-    }
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(receiver,filter);
+    }*/
+
 
     public void registerReceiver (){
         receiver = new ApmReceiver();
         filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         this.registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver();
     }
 
     @Override

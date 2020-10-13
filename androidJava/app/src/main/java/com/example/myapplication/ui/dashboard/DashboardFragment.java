@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,7 +35,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class DashboardFragment extends Fragment implements LocationListener, View.OnClickListener {
+public class DashboardFragment extends Fragment implements LocationListener, View.OnClickListener, View.OnTouchListener {
 
     private DashboardViewModel dashboardViewModel;
     LocationManager locationManager;
@@ -50,6 +51,7 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
@@ -67,7 +69,8 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         locationLongitude = root.findViewById(R.id.text_input_longitude);
         locationAddress = root.findViewById(R.id.text_input_address);
         buttonMap = root.findViewById(R.id.button_toMap);
-        buttonMap.setOnClickListener(this);
+        //buttonMap.setOnClickListener(this);
+        buttonMap.setOnTouchListener(this);
         startLocationUpdates();
         return root;
 
@@ -198,6 +201,25 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
                 startActivateMap();
                 break;
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getActionMasked();
+        float oldTouchValue = event.getX();
+        float currentX = event.getX();
+        switch (action) {
+            case (MotionEvent.ACTION_MOVE) :
+                //tarkistetaan suunta
+                if (oldTouchValue > currentX ) {
+                    Log.d(TAG, "Swiped right"); }
+                startActivateMap();
+                break;
+            default :
+                break;
+        }
+        return true;
     }
 
 }

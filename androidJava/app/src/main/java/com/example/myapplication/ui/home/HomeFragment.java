@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myapplication.Guess;
 import com.example.myapplication.R;
 
-public class HomeFragment extends Fragment implements View.OnClickListener  {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
     public static final String TAG ="MyAppMessage";
