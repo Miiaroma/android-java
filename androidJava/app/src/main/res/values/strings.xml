@@ -5,7 +5,10 @@
     <string name="button_name">Change</string>
     <string name="image_name">Apple</string>
     <string name="button_game">Play</string>
-    <string name="button_toMap">Show on Map</string>
+    <string name="button_toMap">Swipe to Map</string>
+    <string name="startButton">Start</string>
+    <string name="pauseButton">Pause</string>
+    <string name="stopButton">Stop</string>
     <string name="star">ImgBtn</string>
     <string name="star1">ImgBtn1</string>
     <string name="star2">ImgBtn2</string>
@@ -20,4 +23,6 @@
     <string name="label_latitude">Latitude (North-South Location)</string>
     <string name="label_longitude">Longitude (East-West Location)</string>
     <string name="label_address">Address</string>
+    <string name="timeCount" translatable="false"></string>
+    <plurals name="numberpicker_main_picker" />
 </resources>

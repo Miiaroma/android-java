@@ -21,4 +21,7 @@
     <string name="label_address">Osoite</string>
     <string name="button_toMap">Näytä kartalla</string>
     <string name="text_title">Sijaintisi</string>
+    <string name="startButton">Aloita</string>
+    <string name="stopButton">Lopeta</string>
+    <string name="pauseButton">Tauko</string>
 </resources>

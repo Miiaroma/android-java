@@ -69,7 +69,7 @@ public class DashboardFragment extends Fragment implements LocationListener, Vie
         locationLongitude = root.findViewById(R.id.text_input_longitude);
         locationAddress = root.findViewById(R.id.text_input_address);
         buttonMap = root.findViewById(R.id.button_toMap);
-        //buttonMap.setOnClickListener(this);
+        buttonMap.setOnClickListener(this);
         buttonMap.setOnTouchListener(this);
         startLocationUpdates();
         return root;
