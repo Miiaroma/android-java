@@ -38,35 +38,36 @@
    <Button
        android:id="@+id/start"
        style="?attr/materialButtonOutlinedStyle"
-       android:layout_width="wrap_content"
+       android:layout_width="88dp"
        android:layout_height="wrap_content"
 
-       android:layout_marginEnd="4dp"
-       android:layout_marginBottom="233dp"
+       android:layout_marginStart="70dp"
+       android:layout_marginBottom="232dp"
        android:text="@string/startButton"
        app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toStartOf="@+id/pause" />
-
-   <Button
-       android:id="@+id/pause"
-       style="?attr/materialButtonOutlinedStyle"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginEnd="8dp"
-       android:layout_marginBottom="233dp"
-       android:text="@string/pauseButton"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toStartOf="@+id/stop" />
+       app:layout_constraintEnd_toStartOf="@+id/pause"
+       app:layout_constraintStart_toStartOf="parent" />
 
    <Button
        android:id="@+id/stop"
        style="?attr/materialButtonOutlinedStyle"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginBottom="233dp"
+       android:layout_marginBottom="232dp"
        android:text="@string/stopButton"
        app:layout_constraintBottom_toBottomOf="parent"
-       tools:layout_editor_absoluteX="254dp" />
+       app:layout_constraintStart_toEndOf="@+id/pause" />
+
+   <Button
+       android:id="@+id/pause"
+       style="?attr/materialButtonOutlinedStyle"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="232dp"
+       android:text="@string/pauseButton"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/stop"
+       app:layout_constraintStart_toEndOf="@+id/start" />
 
    <TextView
        android:id="@+id/timeCount"

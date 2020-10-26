@@ -1,7 +1,10 @@
 package com.example.myapplication.ui.notifications;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 
-public class NotificationsFragment extends Fragment implements  NumberPicker.OnValueChangeListener, View.OnClickListener{
+public class NotificationsFragment extends Fragment implements View.OnClickListener, NumberPicker.OnValueChangeListener {
 
     private NotificationsViewModel notificationsViewModel;
     private NumberPicker picker1;
@@ -26,7 +29,8 @@ public class NotificationsFragment extends Fragment implements  NumberPicker.OnV
     private TextView timeCount;
     private Button startButton;
     private Button stopButton;
-    private Button pauseButton;
+    Ringtone defaultRingtone;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,17 +49,26 @@ public class NotificationsFragment extends Fragment implements  NumberPicker.OnV
         startButton.setOnClickListener(this);
         stopButton = root.findViewById(R.id.stop);
         stopButton.setOnClickListener(this);
-        pauseButton = root.findViewById(R.id.pause);
-        pauseButton.setOnClickListener(this);
         picker1 = root.findViewById(R.id.numberpicker_main_picker);
+        picker1.setOnValueChangedListener(this);
         picker1.setMaxValue(60);
         picker1.setMinValue(0);
         pickerVals = new String[61];
         for (int i = 0; i < pickerVals.length; i++) {
-            pickerVals[i] = String.format(getContext().getResources().getQuantityString(R.plurals.numberpicker_main_picker, i), i);
+            //Log.e("test", i+" s");
+            pickerVals[i] = i+" s";
+
         }
         picker1.setDisplayedValues(pickerVals);
-
+        /*picker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                int valuePicker1 = picker1.getValue();
+                Log.d("picker value", pickerVals[valuePicker1]);
+            }
+        });*/
+        defaultRingtone = RingtoneManager.getRingtone(getContext(),
+                Settings.System.DEFAULT_RINGTONE_URI);
         return root;
     }
 
@@ -74,7 +87,7 @@ public class NotificationsFragment extends Fragment implements  NumberPicker.OnV
                 timeLeft = millisUntilFinished;
             }
             public void onFinish() {
-                //defaultRingtone.play();
+                defaultRingtone.play();
                 //timerImage.startAnimation(timerAnimation);
                 timeCount.setText("Done!");
             }
@@ -86,9 +99,8 @@ public class NotificationsFragment extends Fragment implements  NumberPicker.OnV
         switch (v.getId()){
             case R.id.start:
                 Log.e("test", "Button has been clicked");
+                countDownTimer();
                 break;
         }
     }
-
-
 }
