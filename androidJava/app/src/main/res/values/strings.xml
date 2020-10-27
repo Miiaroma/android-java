@@ -24,5 +24,5 @@
     <string name="label_longitude">Longitude (East-West Location)</string>
     <string name="label_address">Address</string>
     <string name="timeCount" translatable="false"></string>
-    <plurals name="numberpicker_main_picker" />
+    <string-array name="numberpicker_main_picker" />
 </resources>

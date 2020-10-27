@@ -73,12 +73,14 @@
        android:id="@+id/timeCount"
        android:layout_width="78dp"
        android:layout_height="52dp"
-       android:layout_marginTop="8dp"
-       android:layout_marginBottom="16dp"
+       android:layout_marginStart="181dp"
+       android:layout_marginTop="56dp"
+       android:layout_marginEnd="152dp"
+       android:layout_marginBottom="60dp"
        android:text="@string/timeCount"
-       app:layout_constraintBottom_toTopOf="@+id/start"
+       android:textSize="18sp"
+       app:layout_constraintBottom_toTopOf="@+id/stop"
        app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintHorizontal_bias="0.5"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/numberpicker_main_picker" />
 

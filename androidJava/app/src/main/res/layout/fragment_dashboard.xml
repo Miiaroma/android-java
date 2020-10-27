@@ -9,18 +9,16 @@
 
     <Button
         android:id="@+id/button_toMap"
-        android:layout_width="403dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="240dp"
         android:text="@string/button_toMap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textField_address"
-        app:layout_constraintVertical_bias="0.491" />
+        app:layout_constraintTop_toBottomOf="@+id/textField_address" />
 
     <TextView
         android:id="@+id/text_dashboard"
@@ -30,9 +28,9 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:visibility="invisible"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="56dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="56dp" />
 
     <TextView
         android:id="@+id/text_title"
@@ -58,6 +56,7 @@
         android:enabled="false"
         android:hint="@string/label_latitude"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title"
         tools:ignore="MissingConstraints">
@@ -81,11 +80,11 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:enabled="false"
         android:hint="@string/label_longitude"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textField_latitude"
         tools:ignore="MissingConstraints">
@@ -110,12 +109,12 @@
         android:id="@+id/textField_address"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:enabled="false"
         android:hint="@string/label_address"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textField_longitude"
         tools:ignore="MissingConstraints">

@@ -65,7 +65,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
     public void setScore()
     {
         if(guess > score) {
-            score =guess;
+            score = guess;
             bestScore.setText("Best score:"+guess+"/" +MAX_COUNT);
         }
 
