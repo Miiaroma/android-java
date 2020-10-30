@@ -9,11 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,15 +26,15 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     private String[] pickerVals;
     CountDownTimer countDownTimer;
     int valuePicker1;
+    int time;
     long timeLeft;
     private TextView timeCount;
     private Button startButton;
     private Button stopButton;
     private Button pauseButton;
-    ToggleButton toggleButton;
     boolean isPaused;
     Ringtone defaultRingtone;
-
+    Animation animation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,38 +64,11 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         for (int i = 0; i < pickerVals.length; i++) {
             //Log.e("test", i+" s");
             pickerVals[i] = i+" s";
-
         }
         picker1.setDisplayedValues(pickerVals);
-        /*picker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = picker1.getValue();
-                Log.d("picker value", pickerVals[valuePicker1]);
-            }
-        });*/
         defaultRingtone = RingtoneManager.getRingtone(getContext(),
                 Settings.System.DEFAULT_RINGTONE_URI);
-        ToggleButton toggle = root.findViewById(R.id.toggleButton);
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        pauseButton.setVisibility(View.VISIBLE);
-                        if (isPaused) {
-                            pausedTimer();
-                            isPaused = false;
-                        } else {
-                            Log.i("timer", "On");
-                            countDownTimer();
-                        }
-                    } else {
-                        // The toggle is disabled
-                        Log.i("timer", "Off");
-                        pauseButton.setVisibility(View.GONE);
-                        defaultRingtone.stop();
-                    }
-            }
-        });
+        //animation = AnimationUtils.loadAnimation(getContext(), R.anim.roundanimation);
         return root;
     }
 
@@ -106,8 +78,8 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         Log.d("picker value", pickerVals[valuePicker1]);
     }
 
-    public void countDownTimer() {
-        int time = valuePicker1;
+    private void countDownTimer() {
+        time = valuePicker1;
         countDownTimer = new CountDownTimer(time * 1000,1000) {
             public void onTick(long millisUntilFinished) {
                 timeCount.setText(millisUntilFinished / 1000 + " s left");
@@ -116,19 +88,20 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
             }
             public void onFinish() {
                 defaultRingtone.play();
-                //timerImage.startAnimation(timerAnimation);
+                //timeCount.startAnimation(animation);
                 timeCount.setText("END");
             }
         }.start();
     }
 
-    public void pausedTimer() {
+    private void pausedTimer() {
         countDownTimer = new CountDownTimer(timeLeft,1000) {
             public void onTick(long millisUntilFinished) {
                 timeCount.setText(millisUntilFinished / 1000 + " s left");
             }
             public void onFinish() {
                 defaultRingtone.play();
+                //timeCount.startAnimation(animation);
                 timeCount.setText("END");
             }
         }.start();
@@ -139,23 +112,25 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         switch (v.getId()){
             case R.id.start:
                 Log.e("test", "Button has been clicked");
-                countDownTimer();
+                isPaused = true;
+                if(countDownTimer != null) {
+                    pausedTimer();
+                }
+                else{
+                    countDownTimer();
+                }
                 break;
 
             case R.id.stop:
                 countDownTimer.cancel();
                 defaultRingtone.stop();
+                //animation.cancel();
                 break;
 
             case R.id.pause:
                 Log.i("TAG", "pause button");
-                isPaused = true;
-                if(countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-                toggleButton.setChecked(false);
-                defaultRingtone.stop();
+                countDownTimer.cancel();
                 break;
         }
+        }
     }
-}
