@@ -75,16 +75,17 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     @Override
     public void onValueChange(NumberPicker numberPicker, int i, int i1) {
         valuePicker1 = picker1.getValue();
+        timeLeft = valuePicker1;
         Log.d("picker value", pickerVals[valuePicker1]);
     }
 
+
     private void countDownTimer() {
-        time = valuePicker1;
-        countDownTimer = new CountDownTimer(time * 1000,1000) {
+        countDownTimer = new CountDownTimer(timeLeft * 1000,1000) {
             public void onTick(long millisUntilFinished) {
                 timeCount.setText(millisUntilFinished / 1000 + " s left");
 
-                timeLeft = millisUntilFinished;
+                timeLeft = millisUntilFinished / 1000;
             }
             public void onFinish() {
                 defaultRingtone.play();
@@ -94,35 +95,18 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         }.start();
     }
 
-    private void pausedTimer() {
-        countDownTimer = new CountDownTimer(timeLeft,1000) {
-            public void onTick(long millisUntilFinished) {
-                timeCount.setText(millisUntilFinished / 1000 + " s left");
-            }
-            public void onFinish() {
-                defaultRingtone.play();
-                //timeCount.startAnimation(animation);
-                timeCount.setText("END");
-            }
-        }.start();
-    }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
             case R.id.start:
                 Log.e("test", "Button has been clicked");
-                isPaused = true;
-                if(countDownTimer != null) {
-                    pausedTimer();
-                }
-                else{
-                    countDownTimer();
-                }
+                countDownTimer();
                 break;
 
             case R.id.stop:
                 countDownTimer.cancel();
+                timeCount.setText("END");
                 defaultRingtone.stop();
                 //animation.cancel();
                 break;

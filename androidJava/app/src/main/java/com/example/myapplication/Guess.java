@@ -2,8 +2,10 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
 import java.util.Random;
 
 public class Guess extends AppCompatActivity implements View.OnClickListener {
@@ -31,7 +32,9 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
     int guess;
     int score;
     Intent intent;
-    //File fos;
+    /*File internalStorageDir;
+    File result;
+    File fos;*/
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -51,10 +54,17 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
         floatingActionButton.setOnClickListener(this);
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roundanimation);
         bestScore = findViewById(R.id.bestScore);
+        bestScore.setText("Best score:"+score+"/" +MAX_COUNT);
         intent = new Intent(this, Guess.class);
-        File internalStorageDir = getFilesDir();
-        File score = new File(internalStorageDir, "score.csv");
-
+        SharedPreferences myPreferences
+                = PreferenceManager.getDefaultSharedPreferences(Guess.this);
+        SharedPreferences.Editor myEditor = myPreferences.edit();
+        myEditor.putInt("Score", score);
+        myEditor.commit();
+        score = myPreferences.getInt("Score", guess);
+        /*internalStorageDir = getFilesDir();
+        result = new File(internalStorageDir, "result.csv");
+        write();*/
     }
 
     public int getRandom() {
@@ -67,14 +77,16 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
         if(guess > score) {
             score = guess;
             bestScore.setText("Best score:"+guess+"/" +MAX_COUNT);
+        }else {
+            bestScore.setText("Best score:"+score+"/" +MAX_COUNT);
         }
 
     }
 
-    /*public void write(
+    /*public void write()
     {
         // Create file output stream
-        fos = new FileOutputStream(score);
+        fos = new FileOutputStream(result);
         // Write a line to the file
         fos.write(guess.getBytes());
         // Close the file output stream
