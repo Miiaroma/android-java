@@ -32,9 +32,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
     int guess;
     int score;
     Intent intent;
-    /*File internalStorageDir;
-    File result;
-    File fos;*/
+    SharedPreferences myPreferences;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,17 +52,10 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
         floatingActionButton.setOnClickListener(this);
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roundanimation);
         bestScore = findViewById(R.id.bestScore);
-        bestScore.setText("Best score:"+score+"/" +MAX_COUNT);
         intent = new Intent(this, Guess.class);
-        SharedPreferences myPreferences
-                = PreferenceManager.getDefaultSharedPreferences(Guess.this);
-        SharedPreferences.Editor myEditor = myPreferences.edit();
-        myEditor.putInt("Score", score);
-        myEditor.commit();
-        score = myPreferences.getInt("Score", guess);
-        /*internalStorageDir = getFilesDir();
-        result = new File(internalStorageDir, "result.csv");
-        write();*/
+        myPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        score = myPreferences.getInt("Score", score);
+        bestScore.setText("Best score:"+score+"/" +MAX_COUNT);
     }
 
     public int getRandom() {
@@ -72,26 +63,19 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
         return rnd.nextInt(4);
     }
 
+
+    @SuppressLint("SetTextI18n")
     public void setScore()
-    {
-        if(guess > score) {
-            score = guess;
+    {       if(guess > 0) {
+            SharedPreferences.Editor myEditor = myPreferences.edit();
+            myEditor.putInt("Score", guess);
+            myEditor.commit();
             bestScore.setText("Best score:"+guess+"/" +MAX_COUNT);
-        }else {
+        }else
+            {
             bestScore.setText("Best score:"+score+"/" +MAX_COUNT);
         }
-
     }
-
-    /*public void write()
-    {
-        // Create file output stream
-        fos = new FileOutputStream(result);
-        // Write a line to the file
-        fos.write(guess.getBytes());
-        // Close the file output stream
-        fos.close();
-    }*/
 
     public void onClick(View view) {
         int rnd = getRandom();
@@ -107,7 +91,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                     setScore();
                 }
                 star.setVisibility(View.VISIBLE);
-
+                star.setEnabled(false);
                 break;
 
             case R.id.star1:
@@ -120,7 +104,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                     setScore();
                 }
                 star1.setVisibility(View.VISIBLE);
-
+                star1.setEnabled(false);
                 break;
 
             case R.id.star2:
@@ -133,7 +117,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                     setScore();
                 }
                 star2.setVisibility(View.VISIBLE);
-
+                star2.setEnabled(false);
                 break;
 
             case R.id.star3:
@@ -146,7 +130,7 @@ public class Guess extends AppCompatActivity implements View.OnClickListener {
                     setScore();
                 }
                 star3.setVisibility(View.VISIBLE);
-
+                star3.setEnabled(false);
                 break;
 
             default:

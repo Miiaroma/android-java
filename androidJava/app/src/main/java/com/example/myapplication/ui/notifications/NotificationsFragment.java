@@ -95,7 +95,6 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         }.start();
     }
 
-
     @Override
     public void onClick(View v){
         switch (v.getId()){
