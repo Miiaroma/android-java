@@ -5,6 +5,7 @@
     <string name="button_game">Pelaa</string>
     <string name="button_name">Vaihda</string>
     <string name="text_name">Moikka!</string>
+    <string name="text_edit">Etsi yrityksen nimellä</string>
     <string name="title">Arvauspeli</string>
     <string name="star">Painike</string>
     <string name="star1">Painike1</string>
@@ -24,4 +25,6 @@
     <string name="startButton">Aloita</string>
     <string name="stopButton">Lopeta</string>
     <string name="pauseButton">Tauko</string>
+    <string name="button_search">Etsi</string>
+    <string name="timeCount">Aika</string>
 </resources>

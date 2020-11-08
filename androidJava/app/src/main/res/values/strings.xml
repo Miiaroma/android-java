@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="text_name">Hello!</string>
+    <string name="text_edit">Search company by name</string>
     <string name="title">Guess Game</string>
     <string name="button_name">Change</string>
     <string name="image_name">Apple</string>
     <string name="button_game">Play</string>
+    <string name="button_search">Search</string>
     <string name="button_toMap">Swipe to Map</string>
     <string name="startButton">Start</string>
     <string name="pauseButton">Pause</string>
@@ -22,7 +24,7 @@
     <string name="text_dashboard">Dasboard fragment</string>
     <string name="label_latitude">Latitude (North-South Location)</string>
     <string name="label_longitude">Longitude (East-West Location)</string>
-    <string name="label_address">Address</string>
-    <string name="timeCount" translatable="false"></string>
+    <string name="timeCount"></string>
     <string-array name="numberpicker_main_picker" />
+    <string name="label_address">A</string>
 </resources>
