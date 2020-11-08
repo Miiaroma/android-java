@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.Guess;
 import com.example.myapplication.R;
+import com.example.myapplication.WebApi;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -23,6 +25,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button button;
     TextView textV;
     Button buttonGame;
+    EditText editText;
+    Button buttonSearch;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,9 +40,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         buttonGame = root.findViewById(R.id.buttonGame);
         buttonGame.setOnClickListener(this);
         Log.i(TAG, "activating play view");
-
         textV = root.findViewById(R.id.textV);
         textV.getVisibility();
+        editText = root.findViewById(R.id.editText);
+        editText.getVisibility();
+        buttonSearch = root.findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(this);
 
         /*final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -62,6 +70,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         startActivity(i);
     }
 
+    public void OpenActivityWebApi(){
+        Intent i = new Intent(getActivity(), WebApi.class);
+        i.putExtra("EditText", "editText");
+        startActivity(i);
+    }
+
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -72,6 +86,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             case R.id.buttonGame:
                 OpenActivityGuess();
+                break;
+
+            case R.id.buttonSearch:
+                OpenActivityWebApi();
                 break;
         }
     }
