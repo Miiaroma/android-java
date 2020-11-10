@@ -34,7 +34,6 @@
         <activity
             android:name=".WebApi"
             android:parentActivityName=".Home" />
-            />
         <activity
             android:name=".Guess"
             android:parentActivityName=".Home" />
