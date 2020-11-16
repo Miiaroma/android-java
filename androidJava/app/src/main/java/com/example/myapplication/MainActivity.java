@@ -27,18 +27,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonGame.setOnClickListener(this);
 
         Log.i(TAG, "activating play view");
-
         textView = findViewById(R.id.textView);
         textView.getVisibility();
+        textView.setVisibility(View.INVISIBLE);
+
 
     }
 
     public void setTextVisibility(){
-       if(textView.getVisibility() == View.VISIBLE) {
+
+       /*if(textView.getVisibility() == View.VISIBLE) {
            textView.setVisibility(View.INVISIBLE);
        } else {
-           textView.setVisibility(View.VISIBLE);
-       }
+           textView.setVisibility(View.INVISIBLE);
+       }*/
     }
 
     public void OpenActivityGuess(){

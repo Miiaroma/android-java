@@ -13,11 +13,13 @@
         android:layout_marginTop="350dp"
         android:text="@string/text_name"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.171"
+        tools:visibility="invisible" />
 
     <Button
         android:id="@+id/buttonGame"

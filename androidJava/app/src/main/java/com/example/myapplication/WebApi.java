@@ -5,24 +5,31 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class WebApi extends AppCompatActivity {
     String url = "http://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=editText";
     private static final String TAG = "WebApi activity";
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    RequestQueue requestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,78 +44,53 @@ public class WebApi extends AppCompatActivity {
         if (editText!= null) {
             // do something with the data
         }
+        retrieveJSON();
 
-        //requestQueue = Volley.newRequestQueue(context)
-        RequestQueue requestQueue;
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
 
-        // Instantiate the cache
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        // Set up the network to use HttpURLConnection as the HTTP client.
-        Network network = new BasicNetwork(new HurlStack());
+        // specify an adapter (see also next example)
+        ArrayList<Item> mArray = new ArrayList<Item>();
 
-        // Instantiate the RequestQueue with the cache and network.
-        requestQueue = new RequestQueue(cache, network);
-
-        // Start the queue
-        requestQueue.start();
-
-        //String url ="http://www.example.com";
-
-        // Formulate the request and handle the response.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Do something with the response
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
-                });
-
-        // Add the request to the RequestQueue.
-        requestQueue.add(stringRequest);
-        // ... requestQueue.add(Request<T>request);
-
+        //requestQueue.add(Request<Item>request);
     }
 
-    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-            (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+    private void retrieveJSON(){
+        requestQueue = Volley.newRequestQueue(this);
 
-                @Override
-                public void onResponse(JSONObject response) {
-                    //textView.setText("Response: " + response.toString());
-                    Log.e("response", response.toString());
-                }
-            }, new Response.ErrorListener() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO: Handle error
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray myArray = response.getJSONArray("results");
+                            for (int i = 0; i < myArray.length(); i++) {
+                                JSONObject currentObj = myArray.getJSONObject(i);
+                                String businessID = currentObj.getString("businessId");
+                            }
 
-                }
-            });
+                        } catch (JSONException e) {
+                            Log.e(TAG, e.getMessage());
+                        }
+                        mAdapter = new RecyclerAdapter(MyDataset);
+                        recyclerView.setAdapter(mAdapter);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-    /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-            Request.Method.GET,
-            // the HTTP method to use
-            url,
-            // url
-            null,
-            // null indicates, that no parameters will be posted along with request
-            new Response.Listener<JSONArray>() {
-                // listener to receive the Json response
-                @Override
-                public void onResponse(JSONArray response) {
-                }
-            },
-            new Response.ErrorListener() { // error listener
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });*/
+                    }
+                });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+    }
 }
