@@ -29,7 +29,7 @@ public class WebApi extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue requestQueue;
-
+    ArrayList<Item>myDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +55,6 @@ public class WebApi extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        ArrayList<Item> mArray = new ArrayList<Item>();
-
-        //requestQueue.add(Request<Item>request);
     }
 
     private void retrieveJSON(){
@@ -76,13 +72,21 @@ public class WebApi extends AppCompatActivity {
                             JSONArray myArray = response.getJSONArray("results");
                             for (int i = 0; i < myArray.length(); i++) {
                                 JSONObject currentObj = myArray.getJSONObject(i);
-                                String businessID = currentObj.getString("businessId");
+                                String name = currentObj.getString("name");
+                                /*String businessId = currentObj.getString("businessId");
+                                String registrationDate = currentObj.getString("businessId");
+                                String companyForm = currentObj.getString("companyForm");*/
+
+                                Item item = new Item(name);
+                                item.setName(name);
+                                myDataset.add(item);
+                                Log.e(TAG, "name");
                             }
 
                         } catch (JSONException e) {
                             Log.e(TAG, e.getMessage());
                         }
-                        mAdapter = new RecyclerAdapter(MyDataset);
+                        mAdapter = new RecyclerAdapter(myDataset);
                         recyclerView.setAdapter(mAdapter);
                     }
                 }, new Response.ErrorListener() {
