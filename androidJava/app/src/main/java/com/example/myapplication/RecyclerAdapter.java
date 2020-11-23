@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.RecyclerAdapter.ViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         {Item items = myDataset.get(position);
             holder.name.setText(items.getName());
-            //holder.businessId.setText("" + items.getName());
+            holder.businessId.setText("" + items.getName());
         }
     }
     // Replace the contents of a view (invoked by the layout manager)
@@ -69,14 +67,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
    /* @Override
     public Filter getFilter() {}*/
 
-    public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener)
-    { this.mOnItemClickListener = onItemClickListener;
-    }
-
-    private void onItemHolderClick(ViewHolder itemHolder)
-    { if (mOnItemClickListener != null)
-    { mOnItemClickListener.onItemClick(null, itemHolder.itemView, itemHolder.getAdapterPosition(), itemHolder.getItemId()); } }
-
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item here
@@ -97,7 +87,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //Called when a view has been clicked
         @Override
         public void onClick(View v) {
-            RecyclerAdapter.onItemHolderClick(this);
+            //RecyclerAdapter.onItemHolderClick(this);
         }
     }
 }

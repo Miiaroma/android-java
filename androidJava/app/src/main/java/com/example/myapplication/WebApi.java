@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WebApi extends AppCompatActivity {
-    String url = "http://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=editText";
+    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=10&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=Lappeenrannan";
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -39,22 +39,18 @@ public class WebApi extends AppCompatActivity {
         if (extras == null) {
             return;
         }
-        // get data via the key
+
         String editText = extras.getString(Intent.EXTRA_TEXT);
         if (editText!= null) {
-            // do something with the data
+           url +=editText;
         }
-        retrieveJSON();
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        retrieveJSON();
     }
 
     private void retrieveJSON(){
@@ -70,6 +66,7 @@ public class WebApi extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray myArray = response.getJSONArray("results");
+                            Log.e(TAG, String.valueOf(myArray.length()));
                             for (int i = 0; i < myArray.length(); i++) {
                                 JSONObject currentObj = myArray.getJSONObject(i);
                                 String name = currentObj.getString("name");
@@ -77,10 +74,10 @@ public class WebApi extends AppCompatActivity {
                                 String registrationDate = currentObj.getString("businessId");
                                 String companyForm = currentObj.getString("companyForm");*/
 
-                                Item item = new Item(name);
+                                Item item = new Item();
                                 item.setName(name);
                                 myDataset.add(item);
-                                Log.e(TAG, "name");
+                                Log.e(TAG, "-------------"+name);
                             }
 
                         } catch (JSONException e) {
@@ -96,5 +93,6 @@ public class WebApi extends AppCompatActivity {
                     }
                 });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+        requestQueue.add(jsonObjectRequest);
     }
 }
