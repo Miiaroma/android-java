@@ -60,9 +60,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return myDataset.size();
+        return 0 ;
     }
-
 
    /* @Override
     public Filter getFilter() {}*/
@@ -81,7 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             registrationDate = (TextView) itemView.findViewById(R.id.item_registrationDate);
             companyForm = (TextView) itemView.findViewById(R.id.item_companyForm);*/
             itemView.setOnClickListener(this);
-
         }
 
         //Called when a view has been clicked

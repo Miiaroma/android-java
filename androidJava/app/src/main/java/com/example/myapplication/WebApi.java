@@ -23,26 +23,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WebApi extends AppCompatActivity {
-    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=10&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=Lappeenrannan";
+    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=";
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue requestQueue;
-    ArrayList<Item>myDataset;
+    ArrayList<Item> myDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webapi);
         Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            return;
-        }
+
 
         String editText = extras.getString(Intent.EXTRA_TEXT);
         if (editText!= null) {
-           url +=editText;
+          url +=editText;
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -54,6 +52,7 @@ public class WebApi extends AppCompatActivity {
     }
 
     private void retrieveJSON(){
+
         requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -64,6 +63,8 @@ public class WebApi extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        myDataset = new ArrayList<Item>();
+
                         try {
                             JSONArray myArray = response.getJSONArray("results");
                             Log.e(TAG, String.valueOf(myArray.length()));
@@ -89,7 +90,7 @@ public class WebApi extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e(TAG,error.getMessage());
                     }
                 });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
