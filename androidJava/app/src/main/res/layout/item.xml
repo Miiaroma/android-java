@@ -31,6 +31,45 @@
             card_view:layout_constraintHorizontal_bias="0.5"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/item_businessId"
+          android:layout_width="380dp"
+          android:layout_height="600dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginEnd="8dp"
+          card_view:layout_constraintBottom_toBottomOf="parent"
+          card_view:layout_constraintEnd_toEndOf="parent"
+          card_view:layout_constraintHorizontal_bias="0.5"
+          card_view:layout_constraintStart_toStartOf="parent"
+          card_view:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/item_registrationDate"
+          android:layout_width="380dp"
+          android:layout_height="600dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginEnd="8dp"
+          card_view:layout_constraintBottom_toBottomOf="parent"
+          card_view:layout_constraintEnd_toEndOf="parent"
+          card_view:layout_constraintHorizontal_bias="0.5"
+          card_view:layout_constraintStart_toStartOf="parent"
+          card_view:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/item_companyForm"
+          android:layout_width="380dp"
+          android:layout_height="600dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginEnd="8dp"
+          card_view:layout_constraintBottom_toBottomOf="parent"
+          card_view:layout_constraintEnd_toEndOf="parent"
+          card_view:layout_constraintHorizontal_bias="0.5"
+          card_view:layout_constraintStart_toStartOf="parent"
+          card_view:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,10 +1,16 @@
 package com.example.myapplication;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +32,7 @@ public class WebApi extends AppCompatActivity {
     String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=";
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue requestQueue;
     ArrayList<Item> myDataset;
@@ -49,6 +55,7 @@ public class WebApi extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         retrieveJSON();
+        handleIntent(getIntent());
     }
 
     private void retrieveJSON(){
@@ -71,9 +78,9 @@ public class WebApi extends AppCompatActivity {
                             for (int i = 0; i < myArray.length(); i++) {
                                 JSONObject currentObj = myArray.getJSONObject(i);
                                 String name = currentObj.getString("name");
-                                /*String businessId = currentObj.getString("businessId");
-                                String registrationDate = currentObj.getString("businessId");
-                                String companyForm = currentObj.getString("companyForm");*/
+                                String businessId = currentObj.getString("businessId");
+                                String registrationDate = currentObj.getString("registrationDate");
+                                String companyForm = currentObj.getString("companyForm");
 
                                 Item item = new Item();
                                 item.setName(name);
@@ -95,5 +102,47 @@ public class WebApi extends AppCompatActivity {
                 });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
+                Log.i(TAG, "a) ETSITÄÄN: "+ query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mAdapter.getFilter().filter(query);
+                Log.i(TAG, "b) ETSITÄÄN: "+ query);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //use the query to search your data somehow
+        }
     }
 }

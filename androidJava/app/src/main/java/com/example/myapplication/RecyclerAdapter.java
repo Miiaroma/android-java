@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
     private Context context;
     private List<Item> myDataset;
     public TextView textView;
     private AdapterView.OnItemClickListener mOnItemClickListener;
+
 
 
     // constructor
@@ -46,6 +49,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         {Item items = myDataset.get(position);
             holder.name.setText(items.getName());
             holder.businessId.setText("" + items.getName());
+            holder.registrationDate.setText("" + items.getBusinessId()+ items.getName());
+            holder.companyForm.setText("" + items.getRegistrationDate()+ items.getBusinessId()+ items.getName());
         }
     }
     // Replace the contents of a view (invoked by the layout manager)
@@ -60,11 +65,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return 0 ;
+        return myDataset.size();
     }
 
-   /* @Override
-    public Filter getFilter() {}*/
+    public Filter getFilter() {
+       return new Filter() {
+           FilterResults filterResults;
+           @Override
+           protected FilterResults performFiltering(CharSequence charSequence) {
+
+               return filterResults;
+           }
+           @Override
+           protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+           }
+       };
+   }
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -76,9 +92,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(v);
             this.recyclerAdapter = recyclerAdapter;
             name = (TextView) itemView.findViewById(R.id.item_name);
-            /*businessId = (TextView) itemView.findViewById(R.id.item_businessId);
+            businessId = (TextView) itemView.findViewById(R.id.item_businessId);
             registrationDate = (TextView) itemView.findViewById(R.id.item_registrationDate);
-            companyForm = (TextView) itemView.findViewById(R.id.item_companyForm);*/
+            companyForm = (TextView) itemView.findViewById(R.id.item_companyForm);
             itemView.setOnClickListener(this);
         }
 
@@ -86,6 +102,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View v) {
             //RecyclerAdapter.onItemHolderClick(this);
+            //listener.onContactSelected(contactListFiltered.get(getAdapterPosition()));
         }
     }
 }

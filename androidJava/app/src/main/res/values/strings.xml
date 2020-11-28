@@ -27,4 +27,6 @@
     <string name="timeCount"></string>
     <string-array name="numberpicker_main_picker" />
     <string name="label_address">A</string>
+    <string name="search_hint">search_hint</string>
+    <string name="search_title">search_title</string>
 </resources>
