@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,20 +30,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WebApi extends AppCompatActivity {
-    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=";
+    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=10&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=";
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue requestQueue;
     ArrayList<Item> myDataset;
+    ProgressBar simpleProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webapi);
         Bundle extras = getIntent().getExtras();
-
+        simpleProgressBar = (ProgressBar) findViewById(R.id.simpleProgressBar);
 
         String editText = extras.getString(Intent.EXTRA_TEXT);
         if (editText!= null) {
@@ -59,7 +61,7 @@ public class WebApi extends AppCompatActivity {
     }
 
     private void retrieveJSON(){
-
+        simpleProgressBar.setVisibility(View.VISIBLE);
         requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -84,8 +86,11 @@ public class WebApi extends AppCompatActivity {
 
                                 Item item = new Item();
                                 item.setName(name);
+                                item.setBusinessId(businessId);
+                                item.setRegistrationDate(registrationDate);
+                                item.setCompanyForm(companyForm);
                                 myDataset.add(item);
-                                Log.e(TAG, "-------------"+name);
+                                //Log.e(TAG, "-------------"+name);
                             }
 
                         } catch (JSONException e) {

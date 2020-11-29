@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -29,8 +28,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button buttonSearch;
 
 
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
@@ -41,7 +39,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         buttonGame.setOnClickListener(this);
         Log.i(TAG, "activating play view");
         textV = root.findViewById(R.id.textV);
-        textV.getVisibility();
+        textV.setVisibility(View.INVISIBLE);
+        //textV.getVisibility();
         editText = root.findViewById(R.id.editText);
         editText.getVisibility();
         buttonSearch = root.findViewById(R.id.buttonSearch);
@@ -55,14 +54,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });*/
         return root;
-    }
-
-    public void setTextVisibility(){
-        if(textV.getVisibility() == View.VISIBLE) {
-            textV.setVisibility(View.INVISIBLE);
-        } else {
-            textV.setVisibility(View.VISIBLE);
-        }
     }
 
     public void OpenActivityGuess(){
@@ -81,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.button:
                 Log.e("test", "Button has been clicked");
-                setTextVisibility();
+                textV.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.buttonGame:

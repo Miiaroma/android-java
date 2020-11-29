@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="text_name">Hello!</string>
+    <string name="text_name">Hi there!</string>
     <string name="text_edit">Search company by name</string>
     <string name="title">Guess Game</string>
-    <string name="button_name">Change</string>
+    <string name="button_name">Start</string>
     <string name="image_name">Apple</string>
     <string name="button_game">Play</string>
     <string name="button_search">Search</string>

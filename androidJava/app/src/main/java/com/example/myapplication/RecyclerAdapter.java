@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
-    private Context context;
+    //private Context context;
     private List<Item> myDataset;
     public TextView textView;
-    private AdapterView.OnItemClickListener mOnItemClickListener;
+    private AdapterView.OnItemClickListener onItemClickListener;
 
 
 
     // constructor
     public RecyclerAdapter(ArrayList<Item> myDataset) {
-        this.context = context;
+        //this.context = context;
         this.myDataset = myDataset;
     }
 
