@@ -34,7 +34,6 @@ public class WebApi extends AppCompatActivity {
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     RequestQueue requestQueue;
     ArrayList<Item> myDataset;
     ProgressBar simpleProgressBar;
@@ -43,19 +42,20 @@ public class WebApi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webapi);
-        Bundle extras = getIntent().getExtras();
         simpleProgressBar = (ProgressBar) findViewById(R.id.simpleProgressBar);
-
-        String editText = extras.getString(Intent.EXTRA_TEXT);
+        Bundle extras = getIntent().getExtras();
+        if (extras == null){
+            return;
+        }
+        String editText = extras.getString("EditText");
         if (editText!= null) {
           url +=editText;
+            Log.e(TAG, url);
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         retrieveJSON();
         handleIntent(getIntent());
     }
@@ -96,8 +96,13 @@ public class WebApi extends AppCompatActivity {
                         } catch (JSONException e) {
                             Log.e(TAG, e.getMessage());
                         }
+
+                        simpleProgressBar.setVisibility(View.INVISIBLE);
+
                         mAdapter = new RecyclerAdapter(myDataset);
                         recyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -124,13 +129,13 @@ public class WebApi extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilter().filter(query);
+                //mAdapter.getFilter().filter(query);
                 Log.i(TAG, "a) ETSITÄÄN: "+ query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String query) {
-                mAdapter.getFilter().filter(query);
+                //mAdapter.getFilter().filter(query);
                 Log.i(TAG, "b) ETSITÄÄN: "+ query);
                 return false;
             }

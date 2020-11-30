@@ -32,6 +32,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+         /*final TextView textView = root.findViewById(R.id.text_home);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });*/
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         button = root.findViewById(R.id.button);
         button.setOnClickListener(this);
@@ -46,13 +53,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         buttonSearch = root.findViewById(R.id.buttonSearch);
         buttonSearch.setOnClickListener(this);
 
-        /*final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void OpenActivityWebApi(){
         Intent i = new Intent(getActivity(), WebApi.class);
-        i.putExtra("EditText", "editText");
+        i.putExtra("EditText", editText.getText().toString());
         startActivity(i);
     }
 
