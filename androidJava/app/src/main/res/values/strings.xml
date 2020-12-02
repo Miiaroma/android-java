@@ -24,10 +24,12 @@
     <string name="text_dashboard">Dasboard fragment</string>
     <string name="label_latitude">Latitude (North-South Location)</string>
     <string name="label_longitude">Longitude (East-West Location)</string>
-    <string name="timeCount"></string>
+    <string name="timeCount" />
     <string-array name="numberpicker_main_picker" />
     <string name="label_address">Address</string>
     <string name="search_hint">search_hint</string>
     <string name="search_title">search_title</string>
-    <string name="item_businessId">Business ID</string>
+    <string name="businessId">Business ID</string>
+    <string name="item_companyForm">Company form</string>
+    <string name="item_registrationDate">Company form</string>
 </resources>
