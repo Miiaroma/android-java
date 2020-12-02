@@ -14,13 +14,6 @@ public class Item {
         this.companyForm = "";
     }
 
-    public Item(String businessId, String name, String registrationDate, String companyForm) {
-        this.businessId = businessId;
-        this.name = name;
-        this.registrationDate = registrationDate;
-        this.companyForm = companyForm;
-    }
-
     public String getName(){
         return name;
     }
@@ -38,18 +31,18 @@ public class Item {
     }
 
     public void setName(String name){
-        name = name;
+        this.name = name;
     }
 
     public void setBusinessId(String businessId){
-        businessId = businessId;
+        this.businessId = businessId;
     }
 
     public void setRegistrationDate(String registrationDate){
-        registrationDate = registrationDate;
+        this.registrationDate = registrationDate;
     }
 
     public void setCompanyForm(String companyForm){
-        companyForm = companyForm;
+        this.companyForm = companyForm;
     }
 }

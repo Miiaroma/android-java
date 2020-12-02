@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WebApi extends AppCompatActivity {
-    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=10&resultsFrom=0&companyRegistrationFrom=2014-02-28&name=";
+    String url = "https://avoindata.prh.fi/bis/v1?totalResults=false&maxResults=20&resultsFrom=0&companyRegistrationFrom=2014-01-01&name=";
     private static final String TAG = "WebApi activity";
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
@@ -56,6 +56,7 @@ public class WebApi extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         retrieveJSON();
         handleIntent(getIntent());
     }
@@ -129,13 +130,13 @@ public class WebApi extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //mAdapter.getFilter().filter(query);
+                mAdapter.getFilter().filter(query);
                 Log.i(TAG, "a) ETSITÄÄN: "+ query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String query) {
-                //mAdapter.getFilter().filter(query);
+                mAdapter.getFilter().filter(query);
                 Log.i(TAG, "b) ETSITÄÄN: "+ query);
                 return false;
             }
@@ -150,7 +151,7 @@ public class WebApi extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search your data somehow
         }

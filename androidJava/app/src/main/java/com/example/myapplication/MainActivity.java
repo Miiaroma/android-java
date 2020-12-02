@@ -30,17 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.textView);
         textView.getVisibility();
         textView.setVisibility(View.INVISIBLE);
-
-
-    }
-
-    public void setTextVisibility(){
-
-       /*if(textView.getVisibility() == View.VISIBLE) {
-           textView.setVisibility(View.INVISIBLE);
-       } else {
-           textView.setVisibility(View.INVISIBLE);
-       }*/
     }
 
     public void OpenActivityGuess(){
@@ -53,13 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.button:
                 Log.e("test", "Button has been clicked");
-                setTextVisibility();
+                textView.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.buttonGame:
                 OpenActivityGuess();
                 break;
-
         }
     }
 }

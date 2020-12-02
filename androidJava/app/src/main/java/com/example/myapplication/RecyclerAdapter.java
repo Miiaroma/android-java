@@ -1,16 +1,18 @@
 package com.example.myapplication;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> /*implements Filterable*/ {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
     private ArrayList<Item> myDataset;
 
@@ -18,10 +20,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(ArrayList<Item> myDataset) {
 
         this.myDataset = myDataset;
-        Log.i("xxxx", ""+myDataset.size());
     }
 
     //Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
@@ -29,13 +31,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item items = myDataset.get(position);
             holder.name.setText(items.getName());
-            holder.businessId.setText(items.getBusinessId());
-            /*holder.registrationDate.setText(items.getBusinessId()+ items.getName());
-            holder.companyForm.setText(items.getRegistrationDate()+ items.getBusinessId()+ items.getName());*/
+            holder.businessId.setText("Business ID: "+items.getBusinessId());
+            holder.companyForm.setText("Company Form: "+items.getCompanyForm());
+            holder.registrationDate.setText("Registration Date: "+items.getRegistrationDate());
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -53,7 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return myDataset.size();
     }
 
-    /*public Filter getFilter() {
+    public Filter getFilter() {
        return new Filter() {
            FilterResults filterResults;
            @Override
@@ -65,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
            }
        };
-   }*/
+   }
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -78,14 +81,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             businessId = (TextView) v.findViewById(R.id.item_businessId);
             registrationDate = (TextView) v.findViewById(R.id.item_registrationDate);
             companyForm = (TextView) v.findViewById(R.id.item_companyForm);
+            businessId.setVisibility(View.GONE);
+            registrationDate.setVisibility(View.GONE);
+            companyForm.setVisibility(View.GONE);
             v.setOnClickListener(this);
         }
 
         //Called when a view has been clicked
         @Override
         public void onClick(View v) {
-            //RecyclerAdapter.onItemHolderClick(this);
-            //listener.onContactSelected(contactListFiltered.get(getAdapterPosition()));
+            businessId.setVisibility(View.VISIBLE);
+            registrationDate.setVisibility(View.VISIBLE);
+            companyForm.setVisibility(View.VISIBLE);
         }
     }
 }

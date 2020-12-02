@@ -67,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/img_20200912_193836"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search"

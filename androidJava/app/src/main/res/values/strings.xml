@@ -26,7 +26,8 @@
     <string name="label_longitude">Longitude (East-West Location)</string>
     <string name="timeCount"></string>
     <string-array name="numberpicker_main_picker" />
-    <string name="label_address">A</string>
+    <string name="label_address">Address</string>
     <string name="search_hint">search_hint</string>
     <string name="search_title">search_title</string>
+    <string name="item_businessId">Business ID</string>
 </resources>
