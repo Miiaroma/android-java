@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -58,7 +57,8 @@ public class WebApi extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         retrieveJSON();
-        handleIntent(getIntent());
+        /*setContentView(R.layout.activity_webapi);
+        handleIntent(getIntent());*/
     }
 
     private void retrieveJSON(){
@@ -144,16 +144,17 @@ public class WebApi extends AppCompatActivity {
         return true;
     }
 
-    @Override
+   /*@Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         handleIntent(intent);
     }
 
     private void handleIntent(Intent intent) {
          if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
+            //  doMySearch(query);
         }
-    }
+    }*/
 }

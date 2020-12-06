@@ -15,11 +15,13 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
     private ArrayList<Item> myDataset;
+    private ArrayList<Item> myDatasetFiltered;
 
     // constructor
     public RecyclerAdapter(ArrayList<Item> myDataset) {
 
         this.myDataset = myDataset;
+        this.myDatasetFiltered = myDataset;
     }
 
     //Create new views (invoked by the layout manager)
@@ -58,14 +60,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public Filter getFilter() {
        return new Filter() {
-           FilterResults filterResults;
            @Override
            protected FilterResults performFiltering(CharSequence charSequence) {
+               String charString = charSequence.toString();
+               if (charString.isEmpty()) {
+                   myDatasetFiltered.addAll(myDataset);
+               }
+                else {
+                   ArrayList<Item> myDataset = new ArrayList<>();
+                   for (Item row : myDataset) {
+                       if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                           myDatasetFiltered.add(row);
+                       }
+                   }
+                   myDatasetFiltered = myDataset;
+               }
 
+               FilterResults filterResults = new FilterResults();
+               filterResults.values = myDatasetFiltered;
                return filterResults;
            }
+
            @Override
            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+               myDatasetFiltered = (ArrayList<Item>) filterResults.values;
+               notifyDataSetChanged();
            }
        };
    }
