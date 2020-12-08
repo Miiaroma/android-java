@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myapplication.Exercise;
 import com.example.myapplication.Guess;
 import com.example.myapplication.R;
 import com.example.myapplication.WebApi;
@@ -26,7 +27,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button buttonGame;
     EditText editText;
     Button buttonSearch;
-
+    Button buttonExercise;
 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         editText.getVisibility();
         buttonSearch = root.findViewById(R.id.buttonSearch);
         buttonSearch.setOnClickListener(this);
+        buttonExercise = root.findViewById(R.id.buttonExercise);
+        buttonExercise.setOnClickListener(this);
 
         return root;
     }
@@ -64,6 +67,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void OpenActivityWebApi(){
         Intent i = new Intent(getActivity(), WebApi.class);
         i.putExtra("EditText", editText.getText().toString());
+        startActivity(i);
+    }
+
+    public void OpenActivityExcercise(){
+        Intent i = new Intent(getActivity(), Exercise.class);
         startActivity(i);
     }
 
@@ -81,6 +89,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             case R.id.buttonSearch:
                 OpenActivityWebApi();
+                break;
+
+            case R.id.buttonExercise:
+                OpenActivityExcercise();
                 break;
         }
     }

@@ -2,9 +2,12 @@
 <resources>
     <string name="app_name">Sovellus</string>
     <string name="image_name">Omenat</string>
+    <string name="image_lab">Lab</string>
     <string name="button_game">Pelaa</string>
     <string name="button_name">Vaihda</string>
     <string name="text_name">Moikka!</string>
+    <string name="text_amk">Mikä amk?</string>
+    <string name="text_score">Tulos</string>
     <string name="text_edit">Etsi yrityksen nimellä</string>
     <string name="title">Arvauspeli</string>
     <string name="star">Painike</string>
@@ -27,4 +30,11 @@
     <string name="pauseButton">Tauko</string>
     <string name="button_search">Etsi</string>
     <string name="timeCount">Aika</string>
+    <string name="button_exercise">Harhoitus</string>
+    <string name="button_xamk">XAMK</string>
+    <string name="button_laurea">LAUREA</string>
+    <string name="button_lab">LAB</string>
+    <string name="button_jamk">JAMK</string>
+    <string name="button_tamk">TAMK</string>
+    <string name="button_score">TULOS</string>
 </resources>

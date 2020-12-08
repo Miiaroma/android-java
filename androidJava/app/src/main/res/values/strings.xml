@@ -2,10 +2,13 @@
     <string name="app_name">My Application</string>
     <string name="text_name">Hi there!</string>
     <string name="text_edit">Search company by name</string>
+    <string name="text_amk">What UAS?</string>
     <string name="title">Guess Game</string>
     <string name="button_name">Start</string>
     <string name="image_name">Apple</string>
+    <string name="image_lab">Lab</string>
     <string name="button_game">Play</string>
+    <string name="button_exercise">Exercise</string>
     <string name="button_search">Search</string>
     <string name="button_toMap">Swipe to Map</string>
     <string name="startButton">Start</string>
@@ -32,4 +35,12 @@
     <string name="businessId">Business ID</string>
     <string name="item_companyForm">Company form</string>
     <string name="item_registrationDate">Company form</string>
+    <string name="button_xamk">XAMK</string>
+    <string name="button_laurea">LAUREA</string>
+    <string name="button_lab">LAB</string>
+    <string name="button_jamk">JAMK</string>
+    <string name="button_tamk">tamk</string>
+    <string name="text_score">Score</string>
+    <string name="text_result">XX</string>
+    <string name="button_score">Score</string>
 </resources>

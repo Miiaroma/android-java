@@ -16,14 +16,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+
         <receiver
             android:name=".ApmReceiver"
             android:enabled="true"
             android:exported="true">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </receiver>
 
         <activity
@@ -31,21 +35,33 @@
             android:label="My Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".WebApi"
-            android:parentActivityName=".Home" >
-            <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Guess"
+            android:label="Home"
             android:parentActivityName=".Home" />
+        <activity
+            android:name=".Exercise"
+            android:label="Exercise"
+            android:parentActivityName=".Home" />
+        <activity android:name=".Score"
+            android:label="Exercise"
+            android:parentActivityName=".Exercise" />
+
         <activity
             android:name=".MainActivity"
             android:label="My Application" />
