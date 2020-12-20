@@ -37,4 +37,7 @@
     <string name="button_jamk">JAMK</string>
     <string name="button_tamk">TAMK</string>
     <string name="button_score">TULOS</string>
+    <string name="businessId">Y-tunnus</string>
+    <string name="item_companyForm">Yritysmuoto</string>
+    <string name="item_registrationDate">Rekisteröintipäivä</string>
 </resources>

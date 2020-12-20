@@ -5,6 +5,7 @@ public class Item {
     String name;
     String registrationDate;
     String companyForm;
+    String location;
 
     public Item()
     {
@@ -12,6 +13,7 @@ public class Item {
         this.name = "";
         this.registrationDate = "";
         this.companyForm = "";
+        this.location = "";
     }
 
     public String getName(){
@@ -29,6 +31,9 @@ public class Item {
     public String getCompanyForm(){
         return companyForm;
     }
+    public String getLocation(){
+        return location;
+    }
 
     public void setName(String name){
         this.name = name;
@@ -44,5 +49,9 @@ public class Item {
 
     public void setCompanyForm(String companyForm){
         this.companyForm = companyForm;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
     }
 }

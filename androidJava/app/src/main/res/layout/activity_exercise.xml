@@ -15,6 +15,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/text_amk"
         android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/button_score"
         app:layout_constraintHorizontal_bias="0.834"
@@ -35,10 +36,11 @@
 
     <Button
         android:id="@+id/button_score"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="104dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +50,7 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_xamk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +62,7 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_laurea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -72,7 +74,7 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_lab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
@@ -84,7 +86,7 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_jamk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -96,23 +98,28 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_tamk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_jamk" />
 
+
     <SeekBar
-        android:id="@+id/simpleSeekBar"
+        android:id="@+id/seekBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:max="5"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_tamk" />
+        app:layout_constraintTop_toBottomOf="@+id/button_tamk"
+       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,25 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Exercise extends AppCompatActivity implements View.OnClickListener{
-    private static final String TAG = "Excercise activity";
+public class Exercise extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private static final String TAG = "Exercise activity";
     Button button_xamk;
     Button button_laurea;
     Button button_lab;
     Button button_jamk;
     Button button_tamk;
     Button button_score;
-    int guess;
+    SeekBar seekBar;
+    int progressChangedValue;
+    int progress;
 
 
     @Override
@@ -34,69 +39,94 @@ public class Exercise extends AppCompatActivity implements View.OnClickListener{
         button_score = findViewById(R.id.button_score);
         button_score.getVisibility();
         button_score.setVisibility(View.INVISIBLE);
-        //score = findViewById(R.id.bestScore);
+        button_score.setOnClickListener(this);
+        seekBar = (SeekBar)findViewById(R.id.seekBar);
     }
 
-    /*public void setScore()
-    {       if(guess > 0)
-    {
-        score.setText("Score:"score")
-    }*/
+    // perform seek bar change listener event used for getting the progress value
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        progressChangedValue = progress;
+    }
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        // TODO Auto-generated method stub
+        seekBar.setProgress(progressChangedValue);
+    }
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        Toast.makeText(Exercise.this, "Correct" + progressChangedValue,
+                Toast.LENGTH_SHORT).show();
+    }
 
-    /*public void OpenActivityScore(){
-        Intent i = new Intent(getActivity(), Score.class);
+
+
+    private void setProgressValue(final int progress) {
+
+        // set the progress
+        seekBar.setProgress(progress);
+        // thread is used to change the progress value
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setProgressValue(progress + 1);
+            }
+        });
+        thread.start();
+    }
+
+    public void OpenActivityScore(){
+        Intent i = new Intent(this, Score.class);
         startActivity(i);
-    }*/
-
-
+    }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
             case R.id.button_xamk:
                 button_xamk.setEnabled(false);
-                guess++;
+                onStartTrackingTouch(seekBar);
+                setProgressValue(progress);
                 //setScore();
                 break;
 
             case R.id.button_laurea:
                 button_laurea.setEnabled(false);
-                guess++;
+                onStartTrackingTouch(seekBar);
+                setProgressValue(progress);
                 //setScore();
                 break;
 
             case R.id.button_lab:
                 button_lab.setEnabled(true);
+                onStopTrackingTouch(seekBar);
+                setProgressValue(progress);
                 button_score.setVisibility(View.VISIBLE);
-                guess++;
                 //setScore();
                 break;
 
             case R.id.button_jamk:
               button_jamk.setEnabled(false);
-                guess++;
-                //etScore();
+                onStartTrackingTouch(seekBar);
+                setProgressValue(progress);
+                //setScore();
                 break;
 
             case R.id.button_tamk:
                 button_tamk.setEnabled(false);
-                guess++;
+                onStartTrackingTouch(seekBar);
+                setProgressValue(progress);
                 //setScore();
                 break;
 
             case R.id.button_score:
-                //OpenActivityScore();
+                OpenActivityScore();
                 break;
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

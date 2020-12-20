@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,7 @@ public class WebApi extends AppCompatActivity {
     RequestQueue requestQueue;
     ArrayList<Item> myDataset;
     ProgressBar simpleProgressBar;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +57,7 @@ public class WebApi extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         retrieveJSON();
-        /*setContentView(R.layout.activity_webapi);
-        handleIntent(getIntent());*/
     }
 
     private void retrieveJSON(){
@@ -131,30 +130,16 @@ public class WebApi extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mAdapter.getFilter().filter(query);
-                Log.i(TAG, "a) ETSITÄÄN: "+ query);
+                Log.i(TAG, "a) Searching: "+ query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String query) {
                 mAdapter.getFilter().filter(query);
-                Log.i(TAG, "b) ETSITÄÄN: "+ query);
+                Log.i(TAG, "b) Searching: "+ query);
                 return false;
             }
         });
         return true;
     }
-
-   /*@Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent) {
-         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            //  doMySearch(query);
-        }
-    }*/
 }

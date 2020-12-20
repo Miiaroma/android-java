@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         startActivity(i);
     }
 
-    public void OpenActivityExcercise(){
+    public void OpenActivityExercise(){
         Intent i = new Intent(getActivity(), Exercise.class);
         startActivity(i);
     }
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.buttonExercise:
-                OpenActivityExcercise();
+                OpenActivityExercise();
                 break;
         }
     }

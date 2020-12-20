@@ -17,6 +17,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ArrayList<Item> myDataset;
     private ArrayList<Item> myDatasetFiltered;
 
+
     // constructor
     public RecyclerAdapter(ArrayList<Item> myDataset) {
 
@@ -33,24 +34,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item items = myDataset.get(position);
             holder.name.setText(items.getName());
-            holder.businessId.setText("Business ID: "+items.getBusinessId());
+            holder.businessId.setText("Company Id:" +items.getBusinessId());
             holder.companyForm.setText("Company Form: "+items.getCompanyForm());
             holder.registrationDate.setText("Registration Date: "+items.getRegistrationDate());
     }
-
-    // Replace the contents of a view (invoked by the layout manager)
-   /* @Override
-    public void onBindViewHolder(GridItemViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.textView.setText(myArray[position]);
-
-    }*/
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -103,16 +94,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             businessId.setVisibility(View.GONE);
             registrationDate.setVisibility(View.GONE);
             companyForm.setVisibility(View.GONE);
+            name.setOnClickListener(this);
             v.setOnClickListener(this);
         }
 
         //Called when a view has been clicked
         @Override
         public void onClick(View v) {
-            businessId.setVisibility(View.VISIBLE);
-            registrationDate.setVisibility(View.VISIBLE);
-            companyForm.setVisibility(View.VISIBLE);
+             if (v.getId() == R.id.item_name) {
+                    businessId.setVisibility(View.VISIBLE);
+                    registrationDate.setVisibility(View.VISIBLE);
+                    companyForm.setVisibility(View.VISIBLE);
+             }
         }
     }
 }
+
 

@@ -30,8 +30,8 @@
     <string name="timeCount" />
     <string-array name="numberpicker_main_picker" />
     <string name="label_address">Address</string>
-    <string name="search_hint">search_hint</string>
-    <string name="search_title">search_title</string>
+    <string name="search_hint" translatable="false">search_hint</string>
+    <string name="search_title" translatable="false">search_title</string>
     <string name="businessId">Business ID</string>
     <string name="item_companyForm">Company form</string>
     <string name="item_registrationDate">Company form</string>
@@ -41,6 +41,7 @@
     <string name="button_jamk">JAMK</string>
     <string name="button_tamk">tamk</string>
     <string name="text_score">Score</string>
-    <string name="text_result">XX</string>
+    <string name="text_result" translatable="false">Result</string>
     <string name="button_score">Score</string>
+   <!-- <string name="companyId">Business Id:</string>-->
 </resources>
