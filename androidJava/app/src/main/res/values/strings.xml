@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="text_name">Hi there!</string>
+    <string name="text_name">Hello World!</string>
     <string name="text_edit">Search company by name</string>
     <string name="text_amk">What UAS?</string>
     <string name="title">Guess Game</string>
@@ -24,7 +24,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="text_title">Your Location</string>
-    <string name="text_dashboard">Dasboard fragment</string>
+    <string name="text_dashboard">Dashboard fragment</string>
     <string name="label_latitude">Latitude (North-South Location)</string>
     <string name="label_longitude">Longitude (East-West Location)</string>
     <string name="timeCount" />
@@ -39,9 +39,9 @@
     <string name="button_laurea">LAUREA</string>
     <string name="button_lab">LAB</string>
     <string name="button_jamk">JAMK</string>
-    <string name="button_tamk">tamk</string>
+    <string name="button_tamk">TAMK</string>
     <string name="text_score">Score</string>
-    <string name="text_result" translatable="false">Result</string>
+    <string name="text_result">Result</string>
     <string name="button_score">Score</string>
    <!-- <string name="companyId">Business Id:</string>-->
 </resources>

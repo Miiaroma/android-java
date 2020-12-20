@@ -4,8 +4,8 @@
     <string name="image_name">Omenat</string>
     <string name="image_lab">Lab</string>
     <string name="button_game">Pelaa</string>
-    <string name="button_name">Vaihda</string>
-    <string name="text_name">Moikka!</string>
+    <string name="button_name">Aloita</string>
+    <string name="text_name">Hei maailma!</string>
     <string name="text_amk">Mikä amk?</string>
     <string name="text_score">Tulos</string>
     <string name="text_edit">Etsi yrityksen nimellä</string>
@@ -30,7 +30,7 @@
     <string name="pauseButton">Tauko</string>
     <string name="button_search">Etsi</string>
     <string name="timeCount">Aika</string>
-    <string name="button_exercise">Harhoitus</string>
+    <string name="button_exercise">Harjoitus</string>
     <string name="button_xamk">XAMK</string>
     <string name="button_laurea">LAUREA</string>
     <string name="button_lab">LAB</string>
@@ -40,4 +40,5 @@
     <string name="businessId">Y-tunnus</string>
     <string name="item_companyForm">Yritysmuoto</string>
     <string name="item_registrationDate">Rekisteröintipäivä</string>
+    <string name="text_result">Tulos</string>
 </resources>
