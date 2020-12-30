@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item items = myDataset.get(position);
@@ -49,6 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return myDataset.size();
     }
 
+    @Override
     public Filter getFilter() {
        return new Filter() {
            @Override
@@ -58,13 +61,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                    myDatasetFiltered.addAll(myDataset);
                }
                 else {
-                   ArrayList<Item> myDataset = new ArrayList<>();
-                   for (Item row : myDataset) {
-                       if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
-                           myDatasetFiltered.add(row);
+                   ArrayList<Item> filteredList = new ArrayList<>();
+                   for (Item item : myDataset) {
+                       if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
+                           filteredList.add(item);
                        }
                    }
-                   myDatasetFiltered = myDataset;
+                   myDatasetFiltered = filteredList;
                }
 
                FilterResults filterResults = new FilterResults();
@@ -74,7 +77,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
            @Override
            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-               myDatasetFiltered = (ArrayList<Item>) filterResults.values;
+               myDatasetFiltered = (ArrayList<Item>)filterResults.values;
+
                notifyDataSetChanged();
            }
        };
@@ -95,19 +99,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             registrationDate.setVisibility(View.GONE);
             companyForm.setVisibility(View.GONE);
             name.setOnClickListener(this);
+            businessId.setOnClickListener(this);
+            companyForm.setOnClickListener(this);
+            registrationDate.setOnClickListener(this);
             v.setOnClickListener(this);
         }
 
         //Called when a view has been clicked
         @Override
         public void onClick(View v) {
-             if (v.getId() == R.id.item_name) {
+            if (v.getId() == R.id.item_name) {
                     businessId.setVisibility(View.VISIBLE);
                     registrationDate.setVisibility(View.VISIBLE);
                     companyForm.setVisibility(View.VISIBLE);
-             }
+            }
         }
     }
 }
+
+
 
 

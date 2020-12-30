@@ -59,8 +59,6 @@ public class Exercise extends AppCompatActivity implements View.OnClickListener,
                 Toast.LENGTH_SHORT).show();
     }
 
-
-
     private void setProgressValue(final int progress) {
 
         // set the progress

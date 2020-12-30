@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".WebApi"
-            android:label="Companies"
+            android:label="@string/label_search"
             android:parentActivityName=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -56,10 +56,10 @@
             android:name=".Exercise"
             android:label="Exercise"
             android:parentActivityName=".Home" />
-        <activity android:name=".Score"
+        <activity
+            android:name=".Score"
             android:label="Exercise"
             android:parentActivityName=".Exercise" />
-
         <activity
             android:name=".MainActivity"
             android:label="My Application" />

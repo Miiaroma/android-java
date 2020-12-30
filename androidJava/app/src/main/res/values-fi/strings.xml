@@ -41,4 +41,7 @@
     <string name="item_companyForm">Yritysmuoto</string>
     <string name="item_registrationDate">Rekisteröintipäivä</string>
     <string name="text_result">Tulos</string>
+    <string name="label_search">Etsi nimellä</string>
+    <string name="search_hint">Etsi nimellä</string>
+    <string name="search_title">Etsi nimellä</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +36,6 @@ public class WebApi extends AppCompatActivity {
     RequestQueue requestQueue;
     ArrayList<Item> myDataset;
     ProgressBar simpleProgressBar;
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +124,7 @@ public class WebApi extends AppCompatActivity {
                 (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
